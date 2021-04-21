@@ -48,6 +48,7 @@ Route::get('/admin/quiz/{quizID}/student/{studentID}/logs', 'LogController@showS
 Route::post('/student/quiz', 'QuizController@index')->name('quiz');
 Route::post('/student/quiz/submit', 'QuizController@submitQuiz')->name('submit_quiz');
 Route::post('student/quiz/photo/store', 'StudentController@storeStudentImage')->name('store_student_quiz_image');
+Route::post('student/quiz/disqualify', 'QuizController@disqualifyStudent')->name('disqualify_student');
 
 Auth::routes();
 

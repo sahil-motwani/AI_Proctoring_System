@@ -5,13 +5,13 @@
         <div class="sidebar-content">
             <div class="user">
                 <div class="avatar-sm float-left mr-2">
-{{--                    <img src="../../AnywherePariksha/public/assets/img/profile.jpg" alt="..." class="avatar-img rounded-circle">--}}
+{{--                    <img src="" alt="..." class="avatar-img rounded-circle">--}}
+                    <i class="fas fa-user fa-2x avatar-img rounded-circle"></i> <i class="fas fa-home fas fa-home"></i>
                 </div>
                 <div class="info">
                     <a data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-{{--									{{ $user->name }}--}}
-                                    Username
+									{{ \Illuminate\Support\Facades\Auth::user()->name }}
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -78,7 +78,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="components/gridsystem.html">
+                                <a href="{{ route('view_all_quizzes') }}">
                                     <span class="sub-item">View All Quizzes</span>
                                 </a>
                             </li>

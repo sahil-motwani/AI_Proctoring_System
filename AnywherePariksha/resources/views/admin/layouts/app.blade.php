@@ -30,11 +30,10 @@
     <!-- End Sidebar -->
 
     <div class="main-panel">
-
+w
         @yield('content')
 
     </div>
-
 @include('includes.custom_js')
 @yield('extra_js')
 </body>

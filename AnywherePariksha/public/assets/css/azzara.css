@@ -85,6 +85,15 @@ danger-color : #f3545d
 
 -------------------------------------------------------------------*/
 /* 	 Background Body */
+
+@media print
+{
+    body{
+        -webkit-print-color-adjust: exact;
+    }
+
+}
+
 body {
   background: #f9fbfd; }
   body[data-background-color="bg1"] {

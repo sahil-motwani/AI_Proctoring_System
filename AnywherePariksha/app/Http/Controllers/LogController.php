@@ -28,8 +28,8 @@ class LogController extends Controller
     public function showStudentLogs($quizID, $studentID){
         $student_logs = DB::table('student_image_log')
                         ->join('student_quiz_logs', 'student_quiz_logs.id', 'student_image_log.student_quiz_log_id')
-//                        ->where('student_quiz_logs.student_id', $studentID)
-//                        ->where('student_quiz_logs.quiz_id', $quizID)
+                        ->where('student_quiz_logs.student_id', $studentID)
+                        ->where('student_quiz_logs.quiz_id', $quizID)
                         ->get();
 //        dd($student_logs);
         return view('admin.logs.student_quiz_log', compact('student_logs'));

@@ -22,8 +22,7 @@
                                             <th>Mobile Phone</th>
                                             <th>Multiple faces</th>
                                             <th>No faces</th>
-                                            <th>Watching Left Side</th>
-                                            <th>Watching Right Side</th>
+                                            <th>Not Looking At The Screen</th>
                                             <th>View Student Photos</th>
                                         </tr>
                                         </thead>
@@ -42,9 +41,8 @@
                                                 <td>{{ $quiz_log->mobile_phone }}</td>
                                                 <td>{{ $quiz_log->multiple_faces }}</td>
                                                 <td>{{ $quiz_log->no_faces }}</td>
-                                                <td>{{ $quiz_log->left_side }}</td>
-                                                <td>{{ $quiz_log->right_side }}</td>
-                                                <td><a href="/admin/quiz/1/student/1/logs">HEllo</a></td>
+                                                <td>{{ $quiz_log->not_looking_at_the_screen }}</td>
+                                                <td><a href="{{ route('student_quiz_logs', ['quizID'=>$quiz_log->quiz_id, 'studentID'=>$quiz_log->student_id]) }}">View</a></td>
                                             </tr>
                                         @endforeach
 

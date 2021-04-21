@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 });
 
-var noOfTabSwitches = 0;
+var noOfTabSwitches = 0, mobilePhone = 0, multipleFaces = 0, noFaces = 0, notLookingAtTheScreen = 0, tabSwitches = 0;
 takeSnapShot = function () {
     Webcam.snap( function(data_uri) {
         // display results in page
@@ -63,7 +63,7 @@ function verifyImage(datauri){
 function hello(datauri){
     console.log("Sending");
     $.ajax({
-        url: 'http://eac2a4dd8378.ngrok.io/verify',
+        url: 'http://2e8006f138c0.ngrok.io/verify',
         type: "POST",
         data: {
             image: getProperImageURI(datauri),
@@ -72,6 +72,7 @@ function hello(datauri){
         success: function (data) {
             // alert(data);
             if(data == 12 || data == 13 || data == -11 || data == -8){
+                alert(data);
                 appendFileAndSubmit(datauri, data);
             }
         },
@@ -125,14 +126,31 @@ function appendFileAndSubmit(datauri, data){
     fd.append("image", blob);
 
 
-    if (data == 12)
+    if (data == 12) {
         fd.append("img_cat", 1)//mobile phone
-    else if (data == 13)
+        alert("MOBILE");
+        mobilePhone++;
+    }
+    else if (data == 13) {
         fd.append("img_cat", 2)// multiple faces
-    else if(data == -11)
+        multipleFaces++;
+    }
+    else if(data == -11) {
         fd.append("img_cat", 4)// not looking at the screen
-    else if(data == -8)
+        alert("NO");
+        notLookingAtTheScreen++;
+    }
+    else if(data == -8) {
         fd.append("img_cat", 4)// no faces
+        alert("FACES");
+        noFaces++;
+    }
+    fd.append('student_id', document.getElementById('student_id').value);
+    fd.append('quiz_id', document.getElementById('quiz_id').value);
+    document.getElementById('mobile_phone').value = mobilePhone;
+    document.getElementById('no_faces').value = noFaces;
+    document.getElementById('multiple_faces').value = multipleFaces;
+    document.getElementById('not_looking_at_screen').value = notLookingAtTheScreen;
 
     // Submit Form and upload file
     $.ajax({
@@ -174,6 +192,7 @@ function detectMalpractice(datauri) {
 function handleVisibilityChange() {
     // if (document.hidden) {
     //     noOfTabSwitches++;
+    //document.getElementById('tab_switches').value = noOfTabSwitches;
     //     alert("You are not allowed to switch tabs or else test would be automatically ended")
     //     if(noOfTabSwitches >= 2){
     //         // document.getElementById('quiz_form').submit();

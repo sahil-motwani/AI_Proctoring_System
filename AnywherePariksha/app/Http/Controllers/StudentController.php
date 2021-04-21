@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 class StudentController extends Controller
 {
 
-    private static $student_quiz_log_id = 0;
+    private static $student_quiz_log_id = -1;
 
     public function index(){
         $quizzes = DB::table('quiz_assigned_to')
@@ -46,23 +46,28 @@ class StudentController extends Controller
     public static function getStudentQuizLogId(Request $request)
     {
         if(self::$student_quiz_log_id == -1)
-            self::$student_quiz_log_id = DB::table('student_image_log')->where('student_id', $request['student_id'])->first()->id;
+            self::$student_quiz_log_id = DB::table('student_quiz_logs')
+                ->where('student_id', $request['student_id'])
+                ->where('quiz_id', $request['quiz_id'])
+                ->first()
+                ->id;
+        Log::info(print_r(DB::getQueryLog(), true));
         return self::$student_quiz_log_id;
     }
 
     public function storeStudentImage(Request $request){
-//        dd($request['image']);
+        DB::enableQueryLog();
         $student_quiz_log_id = self::getStudentQuizLogId($request);
         $img_cat = $request['img_cat'];
 
         $path = $request->file('image')->store('public/images');
-        echo $path;
         DB::table('student_image_log')
             ->insert(array(
-                         "student_quiz_log_id"=>1,
+                         "student_quiz_log_id"=>$student_quiz_log_id,
                          "img_cat"=>$img_cat,
                          "img"=>str_replace('public/', '', $path)
         ));
+        Log::info(print_r(DB::getQueryLog(), true));
     }
 
     public function base64_to_jpeg($base64_string, $output_file) {

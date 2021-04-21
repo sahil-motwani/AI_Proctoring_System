@@ -178,10 +178,13 @@
                             <div class="animated fadeIn">
                                 <form action="{{ route('submit_quiz') }}" method="post"
                                       id="quiz_form">
-                                    <input type="hidden" name="quiz_id" value="{{ $quiz_id }}">
-                                    <input type="hidden" name="student_id"
-                                           value="{{ $student_id }}">
-
+                                    <input type="hidden" name="mobile_phone" id="mobile_phone">
+                                    <input type="hidden" name="multiple_faces" id="multiple_faces">
+                                    <input type="hidden" name="no_faces" id="no_faces">
+                                    <input type="hidden" name="not_looking_at_screen" id="not_looking_at_screen">
+                                    <input type="hidden" name="tab_switches" id="tab_switches">
+                                    <input type="hidden" name="quiz_id" id="quiz_id" value="{{ $quiz_id }}">
+                                    <input type="hidden" name="student_id" id="student_id" value="{{ $student_id }}">
                                     @csrf
                                     <?php $j = 0; $i = 0?>
                                     @foreach($questions as $question)
